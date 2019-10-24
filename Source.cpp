@@ -8,44 +8,45 @@
 
 using namespace std;
 
-int fibonacci(int n, int pilih) {
-	int i;
+void fibonacci_maks(int n) {
+
+	int i=0;
 	int angka[3];
 
-	switch (pilih)
-	{
-	case 1:
-		if (n >= 0) {
-			for (int i = 0; i < n; i++)
-			{
-				if (i == 0)
-				{
-					angka[0] = 1;
-					cout << angka[0] << " ";
-				}
-				else if (i == 1)
-				{
-					angka[1] = angka[0];
-					cout << angka[1] << " ";
-				}
-				else {
-					angka[2] = angka[1] + angka[0];
-					cout << angka[2] << " ";
-					angka[0] = angka[1];
-					angka[1] = angka[2];
-				}
-			}
+	angka[2] = 0;
+
+	while (true) {
+		if (i == 0)
+		{
+			angka[0] = 1;
+			cout << angka[0] << " ";
+		}
+		else if (i == 1)
+		{
+			angka[1] = angka[0];
+			cout << angka[1] << " ";
 		}
 		else {
-			cout << endl << "Error..." << endl;
+			angka[2] = angka[1] + angka[0];
+			if (angka[2] > n)
+			{
+				break;
+			}
+			cout << angka[2] << " ";
+			angka[0] = angka[1];
+			angka[1] = angka[2];
 		}
+		i++;
+	}
+}
 
-		break;
+void fibonacci_jumlah(int n) {
 
-	case 2:
-		i = 0;
-		angka[2] = 0;
-		while (true) {
+	int angka[3];
+
+	if (n >= 0) {
+		for (int i = 0; i < n; i++)
+		{
 			if (i == 0)
 			{
 				angka[0] = 1;
@@ -58,25 +59,20 @@ int fibonacci(int n, int pilih) {
 			}
 			else {
 				angka[2] = angka[1] + angka[0];
-				if (angka[2] > n)
-				{
-					break;
-				}
 				cout << angka[2] << " ";
 				angka[0] = angka[1];
 				angka[1] = angka[2];
 			}
-			i++;
 		}
-		break;
-	default:
-		break;
 	}
-
-	return 0;
+	else {
+		cout << endl << "Error..." << endl;
+	}
 }
 
 int main() {
+
+	menu_utama:
 	cout << "//////////////////////////////////////////////////////\n\nPROGRAM UNTUK MENAMPILKAN DERET FIBONACCI\nWritten by : Izzu Zantya Fawwas\n\n//////////////////////////////////////////////////////\n\n";
 
 	int n, pilih;
@@ -90,19 +86,38 @@ int main() {
 	case 1:
 		cout << endl << "Masukkan jumlah bilangan Fibonacci yang ingin ditampilkan : ";
 		cin >> n;
-		fibonacci(n, pilih);
+		if (n > 0)
+		{
+			fibonacci_jumlah(n);
+
+		}
+		else {
+			cout << endl << "Error..." << endl;
+		}
 		cout << endl;
 		break;
 	case 2:
 		cout << endl << "Masukkan bilangan maksimal anda : ";
 		cin >> n;
-		fibonacci(n, pilih);
+		if (n>0)
+		{
+			fibonacci_maks(n);
+
+		}
+		else {
+			cout << endl << "Error..." << endl;
+		}
 		cout << endl;
 		break;
 	default:
 		cout << endl << "Error..." << endl;
 		break;
 	}
+
+	system("pause");
+	system("cls");
+
+	goto menu_utama;
 
 	return 0;
 }
